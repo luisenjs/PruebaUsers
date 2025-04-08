@@ -18,7 +18,7 @@ export function ModalUsuarios({ isOpen, onClose }: modalprops) {
         email: z.string().min(1, { message: "Este campo es requedido." }).regex(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/, { message: "Escriba un correo válido." }),
         phone: z.string().min(1, { message: "Este campo es requedido." }).regex(/^\+?[0-9]{10}$/, { message: "Escriba un número de télefono válido." }),
         website: z.string().min(1, { message: "Este campo es requedido." }).regex(/^[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/, { message: "Escriba un sitio web válido." }),
-        empresa: z.string().min(1, { message: "Este campo es requedido." }).max(30, { message: "No puedes exceder los 30 caracteres." })
+        company: z.string().min(1, { message: "Este campo es requedido." }).max(30, { message: "No puedes exceder los 30 caracteres." })
     })
 
     const { register, handleSubmit, reset, formState: { errors } } = useForm({
@@ -26,16 +26,25 @@ export function ModalUsuarios({ isOpen, onClose }: modalprops) {
     });
 
     useEffect(() => {
+
+        const handleClickOutside = (e: MouseEvent) => {
+            const target = e.target as HTMLElement;
+            const modal = document.querySelector('.modal') as HTMLElement;
+            if (modal && !modal.contains(target)) onClose();
+        };
+
         const handleEscape = (e: KeyboardEvent) => {
             if (e.key === 'Escape') onClose();
         };
 
         if (isOpen) {
+            document.addEventListener("mousedown", handleClickOutside);
             document.addEventListener('keydown', handleEscape);
             document.body.style.overflow = 'hidden';
         }
 
         return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
             document.removeEventListener('keydown', handleEscape);
             document.body.style.overflow = 'auto';
         };
@@ -72,9 +81,9 @@ export function ModalUsuarios({ isOpen, onClose }: modalprops) {
 
     return (
         <div className="fixed inset-0 flex items-center justify-center bg-black/70">
-            <div className="bg-white text-slate-700 rounded-lg shadow-lg p-10 z-20 max-h-fit min-w-[45vw] max-w-[70vw] relative">
-                <button className="hover:cursor-pointer absolute top-6 right-6 text-gray-800 hover:text-gray-500 text-2xl font-bold" onClick={onClose}>
-                    ✕
+            <div className="modal bg-white text-slate-700 rounded-lg shadow-lg p-10 z-20 max-h-fit min-w-[45vw] max-w-[70vw] relative">
+                <button className="hover:cursor-pointer absolute top-10 right-10 text-gray-800 hover:text-gray-500" onClick={onClose}>
+                    <img src="/src/assets/x.svg" />
                 </button>
                 <div className="flex flex-col items-start mb-10">
                     <h2 className="text-2xl">Crear usuario</h2>
@@ -84,33 +93,33 @@ export function ModalUsuarios({ isOpen, onClose }: modalprops) {
                         <div className="grid grid-cols-2 gap-4 mb-10">
                             <div className="flex flex-col">
                                 <label className="font-bold text-black" htmlFor="fullname">Nombres y apellidos</label>
-                                <input className="border-1 border-gray-400 rounded-xl p-2 w-full" type="text" {...register("fullname")} placeholder='Luis Fendando Rivera Rodriguez' id="fullname" />
+                                <input className={`border-1 border-gray-400 rounded-xl p-2 w-full ${errors.fullname ? "border-red-400" : ""}`} type="text" {...register("fullname")} placeholder='Luis Fendando Rivera Rodriguez' id="fullname" />
                                 {errors.fullname && <p className="text-red-400">{errors.fullname.message}</p>}
                             </div>
                             <div className="flex flex-col">
                                 <label className="font-bold text-black" htmlFor="username">Nombre de usuario</label>
-                                <input className="border-1 border-gray-400 rounded-xl p-2 w-full" type="text" {...register("username")} placeholder='luferr' id="username" />
+                                <input className={`border-1 border-gray-400 rounded-xl p-2 w-full ${errors.fullname ? "border-red-400" : ""}`} type="text" {...register("username")} placeholder='luferr' id="username" />
                                 {errors.username && <p className="text-red-400">{errors.username.message}</p>}
                             </div>
                             <div className="flex flex-col">
                                 <label className="font-bold text-black" htmlFor="email">Correo</label>
-                                <input className="border-1 border-gray-400 rounded-xl p-2 w-full" type="text" {...register("email")} placeholder='dominio@ejemplo.com' id="email" />
+                                <input className={`border-1 border-gray-400 rounded-xl p-2 w-full ${errors.fullname ? "border-red-400" : ""}`} type="text" {...register("email")} placeholder='dominio@ejemplo.com' id="email" />
                                 {errors.email && <p className="text-red-400">{errors.email.message}</p>}
                             </div>
                             <div className="flex flex-col">
                                 <label className="font-bold text-black" htmlFor="phone">Teláfono</label>
-                                <input className="border-1 border-gray-400 rounded-xl p-2 w-full" type="text" {...register("phone")} placeholder='0909090909' id="phone" />
+                                <input className={`border-1 border-gray-400 rounded-xl p-2 w-full ${errors.fullname ? "border-red-400" : ""}`} type="text" {...register("phone")} placeholder='0909090909' id="phone" />
                                 {errors.phone && <p className="text-red-400">{errors.phone.message}</p>}
                             </div>
                             <div className="flex flex-col">
                                 <label className="font-bold text-black" htmlFor="website">Sitio Web</label>
-                                <input className="border-1 border-gray-400 rounded-xl p-2 w-full" type="text" {...register("website")} placeholder='mipágina.com' id="website" />
+                                <input className={`border-1 border-gray-400 rounded-xl p-2 w-full ${errors.fullname ? "border-red-400" : ""}`} type="text" {...register("website")} placeholder='mipágina.com' id="website" />
                                 {errors.website && <p className="text-red-400">{errors.website.message}</p>}
                             </div>
                             <div className="flex flex-col">
-                                <label className="font-bold text-black" htmlFor="empresa">Nombe de compañía</label>
-                                <input className="border-1 border-gray-400 rounded-xl p-2 w-full" type="text" {...register("empresa")} placeholder='Mi empresa' id="empresa" />
-                                {errors.empresa && <p className="text-red-400">{errors.empresa.message}</p>}
+                                <label className="font-bold text-black" htmlFor="company">Nombe de compañía</label>
+                                <input className={`border-1 border-gray-400 rounded-xl p-2 w-full ${errors.fullname ? "border-red-400" : ""}`} type="text" {...register("company")} placeholder='Mi empresa' id="company" />
+                                {errors.company && <p className="text-red-400">{errors.company.message}</p>}
                             </div>
                         </div>
                         <div className="flex w-full justify-end">

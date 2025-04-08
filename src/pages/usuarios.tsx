@@ -1,20 +1,12 @@
 import { useReactTable, getCoreRowModel, getSortedRowModel, getFilteredRowModel, createColumnHelper, flexRender } from "@tanstack/react-table"
 import { useEffect, useState } from "react";
 import { ModalUsuarios } from "../components/modalusuarios";
-import { Search, Trash2 } from "lucide-react";
 import Swal from "sweetalert2";
 import axios from "axios";
+import { ModalMasDetalle } from "../components/modalmasdetalle";
+import { User } from "../interfaces/user";
 
-type usuariosdata = {
-    id: string;
-    fullname: string;
-    username: string;
-    email: string;
-    phone: string;
-    website: string;
-}
-
-const columnHelper = createColumnHelper<usuariosdata>();
+const columnHelper = createColumnHelper<User>();
 
 const columns = [
     columnHelper.accessor('id', {
@@ -65,7 +57,11 @@ export function Usuarios() {
 
     const [newUser, setNewUser] = useState<boolean>(false);
 
+    const [masDetalle, setMasDetalle] = useState<boolean>(false);
+
     const [usuarios, setUsuarios] = useState([]);
+
+    const [user, setUser] = useState<User>()
 
     useEffect(() => {
         async function getdata() {
@@ -113,20 +109,28 @@ export function Usuarios() {
         });
     }
 
+    function verMasDetalle(user: User) {
+        setUser(user);
+        setMasDetalle(true);
+    }
+
     return (
         <div>
             <div className="flex flex-col gap-10 p-7">
-                <div className="flex gap-2">
-                    <a>Inicio</a>
-                    /
-                    <a className="text-[#33535F]">Usuarios</a>
+                <div>
+                    <div className="flex gap-1 text-[#366796]">
+                        <i className="fas fa-home" /><a className="underline" href="/">Inicio</a>
+                        /
+                        <a className="text-[#33535F] font-bold" href="/usuarios">Usuarios</a>
+                    </div>
+                    <hr className="w-full text-gray-300" />
                 </div>
                 <div className="flex flex-col gap-3 max-h-full">
                     <div className="flex justify-between">
                         <p className="text-[#33535F] font-bold text-2xl">Listado de usuarios</p>
-                        <button className="bg-[#379ABA] py-2 px-5 rounded-xl text-white" onClick={guardaruser}>Nuevo usuario</button>
+                        <button className="bg-[#379ABA] py-3 px-5 rounded-xl text-white flex gap-2 items-center" onClick={guardaruser}><i className="fa-solid fa-user-plus"></i> Nuevo usuario</button>
                     </div>
-                    <div className="rounded-xl overflow-y-auto">
+                    <div className="rounded-2xl overflow-y-auto shadow-lg">
                         <table className="w-full">
                             <thead className="bg-[#366796] text-white font-normal">
                                 {
@@ -134,7 +138,7 @@ export function Usuarios() {
                                         <tr key={headergroup.id}>
                                             {
                                                 headergroup.headers.map((header) => (
-                                                    <th key={header.id} className="px-4 py-3 text-[#]">
+                                                    <th key={header.id} className="px-4 py-4 text-[#]">
                                                         {flexRender(header.column.columnDef.header, header.getContext())}
                                                     </th>
                                                 ))
@@ -147,18 +151,18 @@ export function Usuarios() {
                             <tbody className="bg-[#F2F6FB]">
                                 {
                                     table.getRowModel().rows.map(row => (
-                                        <tr key={row.id}>
+                                        <tr key={row.id} className={`text-[#6B7A7F] ${row.index % 2 === 0 ? "bg-[#F2F6FB]" : "bg-white"}`}>
                                             {
                                                 row.getVisibleCells().map(cell => (
-                                                    <td className="py-3 text-center" key={cell.id}>
+                                                    <td className="py-4 text-center" key={cell.id}>
                                                         {flexRender(cell.column.columnDef.cell, cell.getContext())}
                                                     </td>
                                                 ))
                                             }
                                             <td>
                                                 <div className='flex gap-3 justify-center'>
-                                                    <button><Search /></button>
-                                                    <button onClick={() => { deleteuser(row.original.id) }}><Trash2 /></button>
+                                                    <button onClick={() => { verMasDetalle(row.original) }}><i className="fa-solid fa-magnifying-glass" /></button>
+                                                    <button onClick={() => { deleteuser(row.original.id) }}><i className="fa-solid fa-trash"></i></button>
                                                 </div>
                                             </td>
                                         </tr>
@@ -166,10 +170,14 @@ export function Usuarios() {
                                 }
                             </tbody>
                         </table>
+                        {usuarios.length === 0 && (
+                            <p className="text-red-400 text-center italic">No hay datos para mostrar de momento</p>
+                        )}
                     </div>
                 </div>
             </div>
             <ModalUsuarios isOpen={newUser} onClose={() => { setNewUser(false) }} />
+            <ModalMasDetalle user={user!} isOpen={masDetalle} onClose={() => { setMasDetalle(false) }} />
         </div>
     )
 }

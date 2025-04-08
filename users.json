@@ -1,31 +1,31 @@
 {
-  "usuarios": [
-    {
-      "id": "001",
-      "fullname": "María González",
-      "username": "mariagonz",
-      "email": "maria.gonzalez@example.com",
-      "phone": "+1 555-123-4567",
-      "website": "mariagonzalez.dev",
-      "empresa": ""
-    },
-    {
-      "id": "002",
-      "fullname": "Carlos Ruiz",
-      "username": "carlos_ruiz",
-      "email": "carlos.ruiz@mail.com",
-      "phone": "+34 600 111 222",
-      "website": "ruizcarlos.es",
-      "empresa": ""
-    },
-    {
-      "id": "003",
-      "fullname": "Ana López",
-      "username": "analopez",
-      "email": "ana.lopez@corp.org",
-      "phone": "+52 55 9876 5432",
-      "website": "ana-lopez.mx",
-      "empresa": ""
-    }
-  ]
+    "usuarios": [
+        {
+            "id": "b423",
+            "fullname": "Luis Jara",
+            "username": "0901234567",
+            "email": "luenjara@espol.edu.ec",
+            "phone": "0962001038",
+            "website": "mipage.sccs",
+            "company": "Espol"
+        },
+        {
+            "id": "a249",
+            "fullname": "PROBANDO POST",
+            "username": "admin",
+            "email": "enjari@outlook.com",
+            "phone": "0962001038",
+            "website": "mipage.sccs",
+            "company": "Espol"
+        },
+        {
+            "id": "f788",
+            "fullname": "PROBANDO POST",
+            "username": "pancho",
+            "email": "enjari@outlook.com",
+            "phone": "0962001038",
+            "website": "mipage.sccs",
+            "company": "SASF"
+        }
+    ]
 }
