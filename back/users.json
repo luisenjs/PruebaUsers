@@ -1,0 +1,40 @@
+{
+  "usuarios": [
+    {
+      "id": "b423",
+      "fullname": "Luis Jara",
+      "username": "0901234567",
+      "email": "luenjara@espol.edu.ec",
+      "phone": "0962001038",
+      "website": "mipage.sccs",
+      "company": "Espol"
+    },
+    {
+      "id": "f788",
+      "fullname": "PROBANDO POST",
+      "username": "pancho",
+      "email": "enjari@outlook.com",
+      "phone": "0962001038",
+      "website": "mipage.sccs",
+      "company": "SASF"
+    },
+    {
+      "id": "dcd1",
+      "fullname": "Pruebaaas Apellidos",
+      "username": "jtierra",
+      "email": "luisjarasanchez13@gmail.com",
+      "phone": "0999999999",
+      "website": "dsds.com",
+      "company": "mi esmpresa"
+    },
+    {
+      "id": "3ef0",
+      "fullname": "Pruebaaas Apellidos",
+      "username": "jtierra",
+      "email": "luisjarasanchez13@gmail.com",
+      "phone": "0999999999",
+      "website": "dsds.com",
+      "company": "mi esmpresa"
+    }
+  ]
+}
