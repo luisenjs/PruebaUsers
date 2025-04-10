@@ -13,7 +13,7 @@ En este proyecto observará la gestión de usuarios. Podrá crear un nuevo usuar
 *Si todos los campos del formulario fueron completados se mostrará una alerta de confirmación.*
 *Si los campos del formulario no fueron completados se mostrará una alerta de error.*
 
-## Pasos para ejcutar
+## Pasos para ejecutar
 
 1. CLonar el repositorio.
 2. Ejecutar ```npm i```.
