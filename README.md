@@ -1,54 +1,21 @@
-# React + TypeScript + Vite
+# Dashboard de usuarios
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Descripción
 
-Currently, two official plugins are available:
+En este proyecto observará la gestión de usuarios. Podrá crear un nuevo usuario, eliminarlo y ver más detalles asociados a ellos.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Flujo para crear un nuevo usuario
 
-## Expanding the ESLint configuration
+1. Dar clic en ```Nuevo usuario```.
+2. Completar el formulario.
+3. Dar clic en ```Guardad``` para agregarlo.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+*Si todos los campos del formulario fueron completados se mostrará una alerta de confirmación.*
+*Si los campos del formulario no fueron completados se mostrará una alerta de error.*
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+## Pasos para ejcutar
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+1. CLonar el repositorio.
+2. Ejecutar ```npm i```.
+3. Levantar el proyecto con ```npm run dev```
+4. Visitar el proyecto [aquí](http://localhost:5173/)
